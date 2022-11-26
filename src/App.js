@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Feed from "./components/Feed";
 import MobileMenu from "./components/MobileMenu";
 import LandingContainer from "./components/LandingContainer";
+import api from "./services/api";
 
 import { useState, useEffect } from "react";
 
@@ -12,7 +13,7 @@ function App() {
   const [query, setQuery] = useState(null);
   const [reloadNewsIdx, setReloadNews] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modal, setModal] = useState(null);
 
   function reloadNews() {
     setReloadNews(reloadNewsIdx + 1);
@@ -25,19 +26,27 @@ function App() {
 
   function login(token) {
     localStorage.setItem("token", token);
+    api.defaults.headers.Authorization = `Bearer ${token}`;
     setLoggedIn(true);
   }
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      setLoggedIn(true);
+    async function loginWithToken() {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const resp = await api.post("/login", { token });
+        if (resp.status === 200) {
+          login(token);
+        }
+      }
     }
+    loginWithToken();
   }, []);
 
   useEffect(() => {
-    if (menuOpen || modalOpen) {
+    if (menuOpen || modal) {
       document.querySelector("html").classList.add("lock-scroll");
-    } else if (!menuOpen && !modalOpen) {
+    } else if (!menuOpen && !modal) {
       document.querySelector("html").classList.remove("lock-scroll");
     }
 
@@ -54,7 +63,7 @@ function App() {
         400
       );
     }
-  }, [menuOpen, modalOpen]);
+  }, [menuOpen, modal]);
 
   return (
     <div className="App">
@@ -69,14 +78,14 @@ function App() {
         setLoading={setLoading}
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
-        modalOpen={modalOpen}
-        setModalOpen={setModalOpen}
+        modal={modal}
+        setModal={setModal}
       />
       <MobileMenu
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
-        modalOpen={modalOpen}
-        setModalOpen={setModalOpen}
+        modal={modal}
+        setModal={setModal}
         query={query}
         setQuery={setQuery}
         reloadNews={reloadNews}

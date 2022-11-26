@@ -3,8 +3,8 @@ import "../menu.css";
 export default function MobileMenu({
   menuOpen,
   setMenuOpen,
-  modalOpen,
-  setModalOpen,
+  modal,
+  setModal,
   query,
   setQuery,
   reloadNews,
@@ -61,19 +61,17 @@ export default function MobileMenu({
     },
   ];
 
-  function toggleModal() {
-    setModalOpen(!modalOpen);
-  }
-
   function updateQuery(e) {
     setQuery(e.target.value);
   }
 
-  function handleLoginButtonClick() {
+  function handleButtonClick(type) {
     if (loggedIn) {
       logout();
-    } else {
-      toggleModal();
+    } else if (type === "login") {
+      setModal("login");
+    } else if (type === "register") {
+      setModal("register");
     }
     setMenuOpen(false);
   }
@@ -139,10 +137,27 @@ export default function MobileMenu({
           ))}
         </ul>
         <div className="menu-button-container">
-          <div className="mobile-login-button" onClick={handleLoginButtonClick}>
-            {buttonIcon}
-            {loggedIn ? <p>Logout</p> : <p>Login</p>}
-          </div>
+          {loggedIn ? (
+            <div className="mobile-login-button" onClick={handleButtonClick}>
+              <p>Logout</p>
+            </div>
+          ) : (
+            <>
+              <div
+                className="mobile-login-button"
+                onClick={() => handleButtonClick("register")}
+              >
+                {buttonIcon}
+                <p>Register</p>
+              </div>
+              <div
+                className="mobile-login-button"
+                onClick={() => handleButtonClick("login")}
+              >
+                <p>Login</p>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

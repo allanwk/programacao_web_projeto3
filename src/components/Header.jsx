@@ -3,7 +3,7 @@
 
 import logo from "../assets/logo.webp";
 import Login from "./Login";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PuffLoader from "react-spinners/PuffLoader";
 
 function Header({
@@ -16,8 +16,8 @@ function Header({
   loading,
   menuOpen,
   setMenuOpen,
-  modalOpen,
-  setModalOpen,
+  modal,
+  setModal,
 }) {
   const [searchOpen, setSearchOpen] = useState(false);
 
@@ -38,10 +38,6 @@ function Header({
       setSearchOpen(!searchOpen);
       if (open && query.length) handleSearch(e);
     }
-  }
-
-  function toggleModal() {
-    setModalOpen(!modalOpen);
   }
 
   let searchIcon = null;
@@ -86,7 +82,7 @@ function Header({
 
   return (
     <>
-      {modalOpen ? <Login toggleModal={toggleModal} login={login} /> : null}
+      <Login modal={modal} setModal={setModal} login={login} />
       <header>
         <nav>
           <a href="#" className="logo-wrapper">
@@ -125,13 +121,15 @@ function Header({
               <line x1="22" y1="2" x2="11" y2="13"></line>
               <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
             </svg>
-            <a>Subscribe</a>
+            <a onClick={loggedIn ? null : () => setModal("register")}>
+              {loggedIn ? "Subscribe" : "Register"}
+            </a>
             {loggedIn ? (
               <a id="login-link" onClick={logout}>
                 Logout
               </a>
             ) : (
-              <a id="login-link" onClick={toggleModal}>
+              <a id="login-link" onClick={() => setModal("login")}>
                 Login
               </a>
             )}
