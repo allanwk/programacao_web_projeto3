@@ -1,0 +1,134 @@
+.menu {
+  background: white;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  height: calc(100vh - 70px);
+  width: 100%;
+  transition: left 0.3s, opacity 0.3s;
+}
+
+.menu-container {
+  padding: 0 80px;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.offset {
+  opacity: 50%;
+  left: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+.menu-items {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu-items > li {
+  border-top: 1px solid #e9ebf7;
+}
+
+.menu-items > li:first-child {
+  border-top: none;
+}
+
+.category {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgb(28, 127, 242);
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+}
+
+.item {
+  color: #282828;
+  cursor: pointer;
+}
+
+.menu-button-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 5px;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 1) 35%
+  );
+}
+
+.mobile-login-button {
+  height: 55px;
+  width: 95%;
+  max-width: 500px;
+  background-color: #1c7ff2;
+  font-size: 19px;
+  font-family: "Helvetica", sans-serif;
+  font-weight: bolder;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.mobile-login-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.menu-search-container {
+  position: relative;
+  height: 48px;
+}
+
+.menu-search-container > svg {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  width: 25px;
+  height: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.menu-search {
+  height: 100%;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 0 16px;
+  width: 100%;
+  font-family: "Helvetica", sans-serif;
+  font-weight: 400;
+}
+
+.menu-search::placeholder {
+  color: rgb(185, 185, 185);
+}
+
+@media screen and (min-width: 900px) {
+  .menu {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .menu-container {
+    padding: 0 16px;
+  }
+}

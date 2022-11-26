@@ -1,0 +1,609 @@
+.lock-scroll {
+  overflow: hidden;
+}
+
+#modal-container {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+  background-color: rgba(0, 0, 0, 0.61);
+  backdrop-filter: blur(5px);
+}
+
+.modal-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-title > * {
+  display: block;
+}
+
+.modal-title svg {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.login {
+  width: clamp(350px, 50%, 500px);
+  margin: 0 auto;
+  background-color: rgb(28, 127, 242);
+  color: white;
+  border-radius: 10px;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+#login-message {
+  text-align: center;
+  display: grid;
+  place-content: center;
+}
+
+.login input {
+  display: block;
+  border: none;
+  line-height: 100%;
+  font-size: 16px;
+  border-radius: 0.125rem;
+  padding: 8px 16px;
+  height: 3rem;
+}
+
+.login button {
+  height: 100%;
+  border: none;
+  background-color: rgb(17, 74, 140);
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 0.25rem;
+  padding: 8px 16px;
+  height: 3rem;
+}
+
+#login-link {
+  margin-left: 1em;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  border-radius: 0.25rem;
+}
+
+.wrapper-link {
+  display: block;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+  color: unset;
+}
+
+nav {
+  display: flex;
+  width: 100vw;
+  max-width: 1300px;
+  margin: 0 auto;
+  height: 70px;
+  padding: 0 15px;
+}
+
+nav > * {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.logo-wrapper {
+  justify-content: flex-start;
+}
+
+.search-wrapper {
+  display: none;
+  place-content: center;
+  margin-right: 15px;
+  height: 100%;
+  width: 60px;
+  transition: background-color 200ms ease-out;
+  cursor: pointer;
+  position: relative;
+}
+
+.search-wrapper.search-wrapper:hover {
+  background-color: rgb(244, 244, 244);
+}
+
+.loggedIn {
+  display: grid;
+}
+
+.search-wrapper input {
+  position: absolute;
+  width: 200px;
+  top: 50%;
+  right: 100%;
+  transform: translateY(-50%);
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  font-size: 15.2px;
+  font-weight: 600;
+  flex-grow: 1.5;
+}
+
+.subscribe {
+  gap: 0;
+  justify-content: flex-end;
+}
+
+.subscribe > a {
+  color: rgb(28, 127, 242);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logo {
+  height: 35px;
+}
+
+.landing-container {
+  height: 385px;
+  display: flex;
+}
+
+.become-smarter {
+  height: 100%;
+  background-color: rgb(28, 127, 242);
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 40px;
+}
+
+.email-input-wrapper {
+  height: 3rem;
+  display: flex;
+  max-width: 600px;
+}
+
+.become-smarter h1,
+.login h1 {
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 44px;
+  margin: 0;
+}
+
+.become-smarter p {
+  line-height: 27px;
+}
+
+.become-smarter > div {
+  max-width: 700px;
+}
+
+.become-smarter input {
+  border: none;
+  height: 100%;
+  line-height: 100%;
+  font-size: 16px;
+  border-radius: 0.125rem;
+  flex: 1;
+  padding: 8px 16px;
+}
+
+::placeholder {
+  color: #cccccc;
+}
+
+.become-smarter button {
+  height: 100%;
+  border: none;
+  background-color: rgb(17, 74, 140);
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 0.25rem;
+  padding: 8px 16px;
+}
+
+.side {
+  height: 100%;
+  flex: 0;
+  flex-basis: 470px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.side-headline {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.side-description {
+  font-size: 14px;
+  margin: 0;
+}
+
+.bold {
+  font-weight: 600 !important;
+}
+
+.latest-banner {
+  background-color: #e2e8f0;
+  text-align: center;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  margin-bottom: 3rem;
+}
+
+.latest-banner > b {
+  font-size: 16px;
+}
+
+.latest-banner > span {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+#stories {
+  max-width: 1370px;
+  width: 95%;
+  margin: 0 auto;
+}
+
+.main-stories {
+  display: flex;
+  flex-direction: row;
+  height: 587px;
+  gap: 40px;
+}
+
+.main-left,
+.main-right {
+  height: 100%;
+  flex: 1;
+}
+
+.main-left h1 {
+  font-size: 36px;
+  line-height: 45px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.main-left h2 {
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 400;
+}
+
+img {
+  object-fit: cover;
+}
+
+.main-left img {
+  width: 100%;
+  aspect-ratio: 1.5;
+}
+
+.main-right {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.main-right > * {
+  flex: 1;
+}
+
+.main-right > a {
+  display: flex;
+}
+
+.text {
+  flex: 1;
+}
+
+.img-container {
+  height: 100%;
+  flex-basis: 200px;
+}
+
+.main-right img {
+  width: 100%;
+  aspect-ratio: 1.5;
+}
+
+.headline {
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 500;
+  margin: 5px 0;
+}
+
+.subtitle {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.author {
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+}
+
+.light {
+  color: #8898aa;
+}
+
+.latest-stories {
+  margin-top: 5rem;
+}
+
+.latest-stories-grid,
+.more-stories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.latest-stories h2,
+.more-stories h2 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 1.5;
+}
+
+.sideways-card {
+  display: flex;
+}
+
+.sideways-card img {
+  height: 150px;
+  aspect-ratio: 1.5;
+}
+
+.side-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 1rem;
+}
+
+.tag {
+  color: rgb(28, 127, 242);
+  font-size: 13.6px;
+  line-height: 20.4px;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 10px 0;
+}
+
+.small-screen-only {
+  display: none;
+}
+
+.menu-hamburguer {
+  justify-content: end;
+}
+
+.menu-icon-container {
+  padding: 10px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1600px) {
+  #stories,
+  nav {
+    max-width: 1120px;
+  }
+
+  .more-stories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  #stories,
+  nav {
+    max-width: 860px;
+  }
+
+  .main-stories {
+    flex-direction: column;
+    height: unset;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .landing-container {
+    flex-direction: column;
+    height: unset;
+  }
+
+  .latest-banner > span {
+    flex: 0 0 100%;
+    text-align: left;
+  }
+
+  .latest-banner {
+    flex-wrap: wrap;
+    justify-content: start;
+    margin-bottom: 16px;
+  }
+
+  .latest-banner > b,
+  .latest-banner > span {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .latest-banner img {
+    height: 24px;
+    width: 24px;
+  }
+
+  .latest-stories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .side {
+    flex-basis: unset;
+  }
+
+  .side > img {
+    max-height: 220px;
+    object-fit: cover;
+  }
+
+  #stories,
+  nav {
+    width: 100%;
+    max-width: unset;
+  }
+
+  nav {
+    max-width: 720px;
+  }
+
+  .latest-stories,
+  .more-stories,
+  .main-right,
+  .text-container {
+    max-width: 690px;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+
+  .main-left img {
+    max-height: 370px;
+    border-radius: 0;
+  }
+
+  .more-stories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .large-screen-only {
+    display: none;
+  }
+
+  .small-screen-only {
+    display: flex;
+  }
+
+  .main-left h1 {
+    font-size: 1.5rem;
+  }
+
+  .main-left h2,
+  .headline {
+    font-size: 1rem;
+  }
+
+  .email-input-wrapper {
+    width: 100%;
+    flex-direction: column;
+    margin: 0 auto;
+    min-height: 80px;
+    max-width: unset;
+  }
+
+  .become-smarter input {
+    width: 100%;
+    flex: 1;
+  }
+
+  .email-input-wrapper button {
+    width: 100%;
+    flex: 1;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .latest-stories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #stories,
+  nav {
+    width: 100%;
+  }
+
+  nav {
+    max-width: 540px;
+  }
+
+  .main-left img {
+    max-height: 270px;
+  }
+
+  .menu-hamburguer {
+    padding-right: 20px;
+  }
+
+  .become-smarter button {
+    margin-top: 12px;
+  }
+
+  .email-input-wrapper {
+    height: 6.5rem;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .sideways-card {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .sideways-card img {
+    height: auto;
+    max-height: 220px;
+    object-fit: cover;
+    width: 100%;
+  }
+}
