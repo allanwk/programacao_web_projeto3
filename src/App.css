@@ -435,6 +435,67 @@ img {
   cursor: pointer;
 }
 
+.new-post {
+  width: 90%;
+  margin: 0 auto;
+  background-color: rgb(28, 127, 242);
+  color: white;
+  border-radius: 10px;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.news-fields {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.news-fields > * {
+  flex: 1;
+}
+
+#login-message {
+  text-align: center;
+  display: grid;
+  place-content: center;
+}
+
+.new-post input {
+  display: block;
+  border: none;
+  line-height: 100%;
+  font-size: 16px;
+  border-radius: 0.125rem;
+  padding: 8px 16px;
+  height: 3rem;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.new-post button {
+  height: 100%;
+  border: none;
+  background-color: rgb(17, 74, 140);
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 0.25rem;
+  padding: 8px 16px;
+  height: 3rem;
+}
+
+#image-preview {
+  max-width: 200px;
+}
+
+.image-upload {
+  display: flex;
+  flex-direction: row;
+}
+
 @media screen and (max-width: 1600px) {
   #stories,
   nav {
@@ -605,5 +666,10 @@ img {
     max-height: 220px;
     object-fit: cover;
     width: 100%;
+  }
+
+  .news-fields {
+    flex-direction: column;
+    gap: 0;
   }
 }

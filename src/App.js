@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Feed from "./components/Feed";
 import MobileMenu from "./components/MobileMenu";
 import LandingContainer from "./components/LandingContainer";
+import NewPost from "./components/NewPost";
 import api from "./services/api";
 
 import { useState, useEffect } from "react";
@@ -14,6 +15,8 @@ function App() {
   const [reloadNewsIdx, setReloadNews] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [modal, setModal] = useState(null);
+  const [newPostOpen, setNewPostOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   function reloadNews() {
     setReloadNews(reloadNewsIdx + 1);
@@ -36,6 +39,9 @@ function App() {
       if (token) {
         const resp = await api.post("/login", { token });
         if (resp.status === 200) {
+          if ("isAdmin" in resp.data.decoded) {
+            setIsAdmin(resp.data.decoded.isAdmin);
+          }
           login(token);
         }
       }
@@ -67,6 +73,7 @@ function App() {
 
   return (
     <div className="App">
+      <NewPost open={newPostOpen} setOpen={setNewPostOpen} />
       <Header
         loggedIn={loggedIn}
         login={login}
@@ -80,6 +87,9 @@ function App() {
         setMenuOpen={setMenuOpen}
         modal={modal}
         setModal={setModal}
+        setIsAdmin={setIsAdmin}
+        isAdmin={isAdmin}
+        setNewPostOpen={setNewPostOpen}
       />
       <MobileMenu
         menuOpen={menuOpen}

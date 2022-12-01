@@ -2,6 +2,7 @@
 /* eslint jsx-a11y/alt-text: 0 */
 
 import { useEffect, useState } from "react";
+import api from "../services/api";
 
 export default function Feed({ query, reloadNewsIdx, loading, setLoading }) {
   const [news, setNews] = useState([]);
@@ -15,25 +16,13 @@ export default function Feed({ query, reloadNewsIdx, loading, setLoading }) {
         )}${suffix}`;
 
   useEffect(() => {
-    let url;
-    if (!query) {
-      url = `https://api.currentsapi.services/v1/search?language=en&apiKey=${process.env.REACT_APP_API_KEY}&category=technology,programming,science,business`;
-    } else {
-      url = `https://api.currentsapi.services/v1/search?language=en&apiKey=${process.env.REACT_APP_API_KEY}&keywords=${query}&limit=20`;
+    async function getNews() {
+      const resp = await api.get("/post" + (query ? `?search=${query}` : ""));
+      setNews(resp.data.news);
+      setLoading(false);
     }
     setLoading(true);
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        const filteredNews = data.news.filter(
-          (n) =>
-            n.image !== "None" &&
-            n.title.length > 10 &&
-            n.description.length > 10
-        );
-        setNews(filteredNews);
-        setLoading(false);
-      });
+    getNews();
   }, [reloadNewsIdx]);
 
   return (
@@ -55,7 +44,7 @@ export default function Feed({ query, reloadNewsIdx, loading, setLoading }) {
         {news.length > 1 ? (
           <div className="main-right">
             {news.slice(1, 4).map((n) => (
-              <a href={n.url} className="wrapper-link" key={n.id}>
+              <a href={n.url} className="wrapper-link" key={n._id}>
                 <div className="text">
                   <h1 className="headline">{truncate(n.title, 50, "...")}</h1>
                   <h2 className="subtitle">
@@ -77,7 +66,7 @@ export default function Feed({ query, reloadNewsIdx, loading, setLoading }) {
           <h2>Latest Stories</h2>
           <div className="latest-stories-grid">
             {news.slice(4, 10).map((n) => (
-              <a href={n.url} className="card wrapper-link" key={n.id}>
+              <a href={n.url} className="card wrapper-link" key={n._id}>
                 <img src={n.image} />
                 <p className="tag">{n.category}</p>
                 <h1 className="headline">{truncate(n.title, 50, "...")}</h1>
@@ -93,7 +82,11 @@ export default function Feed({ query, reloadNewsIdx, loading, setLoading }) {
           <h2>More Stories</h2>
           <div className="more-stories-grid">
             {news.slice(10, 16).map((n) => (
-              <a className="sideways-card wrapper-link" href={n.url} key={n.id}>
+              <a
+                className="sideways-card wrapper-link"
+                href={n.url}
+                key={n._id}
+              >
                 <img src={n.image} />
                 <div className="side-text">
                   <p className="tag">{n.category}</p>

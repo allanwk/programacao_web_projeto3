@@ -18,6 +18,9 @@ function Header({
   setMenuOpen,
   modal,
   setModal,
+  setIsAdmin,
+  isAdmin,
+  setNewPostOpen,
 }) {
   const [searchOpen, setSearchOpen] = useState(false);
 
@@ -38,6 +41,10 @@ function Header({
       setSearchOpen(!searchOpen);
       if (open && query.length) handleSearch(e);
     }
+  }
+
+  function openNewPostModal() {
+    setNewPostOpen(true);
   }
 
   let searchIcon = null;
@@ -80,9 +87,25 @@ function Header({
     </svg>
   );
 
+  let subscribeOrNewPostButton;
+  if (isAdmin && loggedIn) {
+    subscribeOrNewPostButton = <a onClick={openNewPostModal}>New post</a>;
+  } else {
+    subscribeOrNewPostButton = (
+      <a onClick={loggedIn ? null : () => setModal("register")}>
+        {loggedIn ? "Subscribe" : "Register"}
+      </a>
+    );
+  }
+
   return (
     <>
-      <Login modal={modal} setModal={setModal} login={login} />
+      <Login
+        modal={modal}
+        setModal={setModal}
+        login={login}
+        setIsAdmin={setIsAdmin}
+      />
       <header>
         <nav>
           <a href="#" className="logo-wrapper">
@@ -121,9 +144,7 @@ function Header({
               <line x1="22" y1="2" x2="11" y2="13"></line>
               <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
             </svg>
-            <a onClick={loggedIn ? null : () => setModal("register")}>
-              {loggedIn ? "Subscribe" : "Register"}
-            </a>
+            {subscribeOrNewPostButton}
             {loggedIn ? (
               <a id="login-link" onClick={logout}>
                 Logout

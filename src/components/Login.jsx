@@ -2,7 +2,7 @@ import PuffLoader from "react-spinners/PuffLoader";
 import { useState } from "react";
 import api from "../services/api";
 
-export default function Login({ modal, setModal, login }) {
+export default function Login({ modal, setModal, login, setIsAdmin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
@@ -32,6 +32,9 @@ export default function Login({ modal, setModal, login }) {
     if (modal === "register") {
       const response = await api.post("/register", { user, email, password });
       if ("token" in response.data) {
+        if ("isAdmin" in response.data) {
+          setIsAdmin(response.data.isAdmin);
+        }
         login(response.data.token);
         setMessage("Registered successfully!");
         setTimeout(() => {
@@ -43,7 +46,11 @@ export default function Login({ modal, setModal, login }) {
       }
     } else {
       const response = await api.post("/login", { user: email, password });
+      console.log(response.data);
       if ("token" in response.data) {
+        if ("isAdmin" in response.data) {
+          setIsAdmin(response.data.isAdmin);
+        }
         login(response.data.token);
         setMessage("Logged in successfully!");
         setTimeout(() => {
