@@ -79,6 +79,9 @@ export default function Login({ modal, setModal, login, setIsAdmin }) {
               />
             </svg>
           </div>
+          {modal !== "register" ? (
+            <label>Admin user: admin, password: 123</label>
+          ) : null}
           {modal === "register" ? (
             <>
               <label htmlFor="login-user">Username</label>
