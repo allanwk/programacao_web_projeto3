@@ -17,9 +17,14 @@ export default function Feed({ query, reloadNewsIdx, loading, setLoading }) {
 
   useEffect(() => {
     async function getNews() {
-      const resp = await api.get("/post" + (query ? `?search=${query}` : ""));
-      setNews(resp.data.news);
-      setLoading(false);
+      try {
+        const resp = await api.get("/post" + (query ? `?search=${query}` : ""));
+        setNews(resp.data.news);
+        setLoading(false);
+      } catch (err) {
+        console.log(err);
+        setLoading(false);
+      }
     }
     setLoading(true);
     getNews();

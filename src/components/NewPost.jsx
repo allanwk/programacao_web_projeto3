@@ -1,9 +1,11 @@
+import PuffLoader from "react-spinners/PuffLoader";
 import { useState } from "react";
 import api from "../services/api";
 
 export default function NewPost({ open, setOpen }) {
   const [post, setPost] = useState({});
   const [image, setImage] = useState(null);
+  const [message, setMessage] = useState(null);
 
   function handleFieldChange(e) {
     post[e.target.name] = e.target.value;
@@ -18,6 +20,7 @@ export default function NewPost({ open, setOpen }) {
   }
 
   async function handleSubmit(e) {
+    setMessage(<PuffLoader color="white" />);
     e.preventDefault();
     const { title, description, author, category, url } = post;
     const formData = new FormData();
@@ -32,9 +35,11 @@ export default function NewPost({ open, setOpen }) {
         "content-type": "multipart/form-data",
       },
     };
-    const resp = await api.post("/post", formData, config);
-    if (resp.status === 200) {
+    try {
+      const resp = await api.post("/post", formData, config);
       window.location.reload();
+    } catch (err) {
+      setMessage(err.response.data.error || err.response.data.message);
     }
   }
 
@@ -107,6 +112,7 @@ export default function NewPost({ open, setOpen }) {
             />
             <img id="image-preview" src="#" alt="" />
           </div>
+          {message ? <h3 className="status-message">{message}</h3> : null}
           <button type="submit">Create post</button>
         </form>
       </div>

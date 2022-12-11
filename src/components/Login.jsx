@@ -30,35 +30,42 @@ export default function Login({ modal, setModal, login, setIsAdmin }) {
     e.preventDefault();
     setMessage(<PuffLoader color="white" />);
     if (modal === "register") {
-      const response = await api.post("/register", { user, email, password });
-      if ("token" in response.data) {
-        if ("isAdmin" in response.data) {
-          setIsAdmin(response.data.isAdmin);
+      try {
+        const response = await api.post("/register", { user, email, password });
+        if ("token" in response.data) {
+          if ("isAdmin" in response.data) {
+            setIsAdmin(response.data.isAdmin);
+          }
+          login(response.data.token);
+          setMessage("Registered successfully!");
+          setTimeout(() => {
+            setModal(null);
+            setMessage(null);
+          }, 500);
+        } else {
+          setMessage(response.data.error || response.data.message);
         }
-        login(response.data.token);
-        setMessage("Registered successfully!");
-        setTimeout(() => {
-          setModal(null);
-          setMessage(null);
-        }, 500);
-      } else {
-        setMessage(response.data.error || response.data.message);
+      } catch (err) {
+        setMessage(err.response.data.error || err.response.data.message);
       }
     } else {
-      const response = await api.post("/login", { user: email, password });
-      console.log(response.data);
-      if ("token" in response.data) {
-        if ("isAdmin" in response.data) {
-          setIsAdmin(response.data.isAdmin);
+      try {
+        const response = await api.post("/login", { user: email, password });
+        if ("token" in response.data) {
+          if ("isAdmin" in response.data) {
+            setIsAdmin(response.data.isAdmin);
+          }
+          login(response.data.token);
+          setMessage("Logged in successfully!");
+          setTimeout(() => {
+            setModal(null);
+            setMessage(null);
+          }, 500);
+        } else {
+          setMessage(response.data.error || response.data.message);
         }
-        login(response.data.token);
-        setMessage("Logged in successfully!");
-        setTimeout(() => {
-          setModal(null);
-          setMessage(null);
-        }, 500);
-      } else {
-        setMessage(response.data.error || response.data.message);
+      } catch (err) {
+        setMessage(err.response.data.error || err.response.data.message);
       }
     }
   }
@@ -112,7 +119,7 @@ export default function Login({ modal, setModal, login, setIsAdmin }) {
             type="password"
             placeholder="your password"
           />
-          {message ? <h3 id="login-message">{message}</h3> : null}
+          {message ? <h3 className="status-message">{message}</h3> : null}
           {modal === "register" ? (
             <button type="submit">Register</button>
           ) : (

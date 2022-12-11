@@ -457,7 +457,7 @@ img {
   flex: 1;
 }
 
-#login-message {
+.status-message {
   text-align: center;
   display: grid;
   place-content: center;
